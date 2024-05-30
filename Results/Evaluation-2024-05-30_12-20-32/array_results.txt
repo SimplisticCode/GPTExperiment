@@ -1,0 +1,21 @@
+Iteration: 0
+Model: Models/Experiment_2/array.pml, Number of Killed Mutants: 0, Number of Surviving Mutants: 1
+, Specification: valid_index_always, Number of Killed Mutants: 0, Mutation Score: 0.0
+, Specification: eventually_array_correct, Number of Killed Mutants: 0, Mutation Score: 0.0
+, Specification: eventually_index_complete, Number of Killed Mutants: 0, Mutation Score: 0.0
+, Specification: array_correct_when_index_complete, Number of Killed Mutants: 4, Mutation Score: 0.8
+Surviving Mutants: Results/Evaluation-2024-05-30_12-20-32/surviving_mutants/mutant_5_temp_2024-05-30_12-20-49.pml, 
+Iteration: 1
+Model: Models/Experiment_2/array.pml, Number of Killed Mutants: 0, Number of Surviving Mutants: 1
+, Specification: valid_index_always, Number of Killed Mutants: 0, Mutation Score: 0.0
+, Specification: eventually_array_correct, Number of Killed Mutants: 0, Mutation Score: 0.0
+, Specification: eventually_index_complete, Number of Killed Mutants: 0, Mutation Score: 0.0
+, Specification: array_correct_when_index_complete, Number of Killed Mutants: 0, Mutation Score: 0.0
+Surviving Mutants: Results/Evaluation-2024-05-30_12-20-32/surviving_mutants/mutant_5_temp_2024-05-30_12-20-49_temp_2024-05-30_12-22-52.pml, 
+Iteration: 2
+Model: Models/Experiment_2/array.pml, Number of Killed Mutants: 1, Number of Surviving Mutants: 0
+, Specification: valid_index_always, Number of Killed Mutants: 0, Mutation Score: 0.0
+, Specification: eventually_array_correct, Number of Killed Mutants: 0, Mutation Score: 0.0
+, Specification: eventually_index_complete, Number of Killed Mutants: 0, Mutation Score: 0.0
+, Specification: array_correct_when_index_complete, Number of Killed Mutants: 1, Mutation Score: 1.0
+Surviving Mutants: 

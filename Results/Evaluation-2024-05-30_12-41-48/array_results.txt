@@ -1,0 +1,24 @@
+Iteration: 0
+Model: Models/Experiment_2/array.pml, Number of Killed Mutants: 4, Number of Surviving Mutants: 1
+, Specification: eventually_array_0_correct,                         Number of Killed Mutants: 0 - []                         Mutation Score: 0.0
+, Specification: eventually_array_1_correct,                         Number of Killed Mutants: 0 - []                         Mutation Score: 0.0
+, Specification: eventually_array_2_correct,                         Number of Killed Mutants: 0 - []                         Mutation Score: 0.0
+, Specification: eventually_array_3_correct,                         Number of Killed Mutants: 0 - []                         Mutation Score: 0.0
+, Specification: eventually_index_reached_end,                         Number of Killed Mutants: 0 - []                         Mutation Score: 0.0
+, Specification: array_correct_at_end,                         Number of Killed Mutants: 4 - ['mutant_1.pml', 'mutant_2.pml', 'mutant_3.pml', 'mutant_4.pml']                         Mutation Score: 0.8
+Surviving Mutants: ['mutant_5_temp_2024-05-30_12-42-17.pml']
+
+Iteration: 1
+Model: Models/Experiment_2/array.pml, Number of Killed Mutants: 0, Number of Surviving Mutants: 1
+, Specification: eventually_array_0_correct,                         Number of Killed Mutants: 0 - []                         Mutation Score: 0.0
+, Specification: eventually_array_1_correct,                         Number of Killed Mutants: 0 - []                         Mutation Score: 0.0
+, Specification: eventually_array_2_correct,                         Number of Killed Mutants: 0 - []                         Mutation Score: 0.0
+, Specification: eventually_array_3_correct,                         Number of Killed Mutants: 0 - []                         Mutation Score: 0.0
+, Specification: eventually_index_reached_end,                         Number of Killed Mutants: 0 - []                         Mutation Score: 0.0
+, Specification: array_correct_at_end,                         Number of Killed Mutants: 0 - []                         Mutation Score: 0.0
+, Specification: array_0_correct_when_index_1,                         Number of Killed Mutants: 0 - []                         Mutation Score: 0.0
+, Specification: array_1_correct_when_index_2,                         Number of Killed Mutants: 0 - []                         Mutation Score: 0.0
+, Specification: array_2_correct_when_index_3,                         Number of Killed Mutants: 0 - []                         Mutation Score: 0.0
+, Specification: array_3_correct_when_index_4,                         Number of Killed Mutants: 0 - []                         Mutation Score: 0.0
+Surviving Mutants: ['mutant_5_temp_2024-05-30_12-42-17_temp_2024-05-30_12-42-45.pml']
+

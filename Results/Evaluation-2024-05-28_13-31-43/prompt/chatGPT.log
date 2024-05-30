@@ -1,0 +1,15 @@
+2024-05-28 13:31:43 - INFO - Querying ChatGPT to CREATE_Specification in the model trafficlight
+2024-05-28 13:31:59 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-05-28 13:31:59 - INFO - Response from ChatGPT on CREATE_Specification in the model trafficlight
+2024-05-28 13:32:15 - INFO - Querying ChatGPT to CREATE_Specification in the model leader
+2024-05-28 13:32:35 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-05-28 13:32:35 - INFO - Response from ChatGPT on CREATE_Specification in the model leader
+2024-05-28 13:32:35 - INFO - Querying ChatGPT to FIX_CompileError in the model leader_temp_2024-05-28_13-32-35
+2024-05-28 13:33:03 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-05-28 13:33:03 - INFO - Response from ChatGPT on FIX_CompileError in the model leader_temp_2024-05-28_13-32-35
+2024-05-28 13:33:27 - INFO - Querying ChatGPT to FIX_CompileError in the model leader_temp_2024-05-28_13-32-35
+2024-05-28 13:33:44 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-05-28 13:33:44 - INFO - Response from ChatGPT on FIX_CompileError in the model leader_temp_2024-05-28_13-32-35
+2024-05-28 13:34:31 - INFO - Querying ChatGPT to FIX_VerificationError in the model leader_temp_2024-05-28_13-32-35
+2024-05-28 13:35:02 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-05-28 13:35:02 - INFO - Response from ChatGPT on FIX_VerificationError in the model leader_temp_2024-05-28_13-32-35
