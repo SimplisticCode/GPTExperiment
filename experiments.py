@@ -84,16 +84,21 @@ class Experiment:
         return new_mutants
     
     @staticmethod
-    def create_experiment_result(model_file, iteration, mutants : list, specificationDict : dict) -> ExperimentResult:
+    def create_experiment_result(model_file : str, iteration : int, mutants : list, specificationDict : dict) -> ExperimentResult:
         spec_results = []
+        surviving_mutants, killed_mutants = set(), set()
         for spec in specificationDict:
-            killed_mutants = specificationDict[spec]
-            surviving_mutants = []
+            spec_killed_mutants = specificationDict[spec]
+            killed_mutants = killed_mutants.union(set(spec_killed_mutants))
+            spec_surviving_mutants = []
             for mutant in mutants:
-                if mutant not in killed_mutants:
-                    surviving_mutants.append(mutant)
-            spec_result = SpecificationResult(spec, surviving_mutants, killed_mutants)
+                if mutant not in spec_killed_mutants:
+                    spec_surviving_mutants.append(mutant)
+            spec_result = SpecificationResult(spec, spec_surviving_mutants, spec_killed_mutants)
             spec_results.append(spec_result)
+        surviving_mutants = set(mutants) - killed_mutants
+        surviving_mutants = list(surviving_mutants)
+        killed_mutants = list(killed_mutants)
         experiment_result = ExperimentResult(model_file, iteration, killed_mutants, surviving_mutants, spec_results)
         return experiment_result
     
@@ -176,18 +181,24 @@ class Experiment:
             mutants_to_check = surviving_mutants
 
         print(f"Checking the final specification for all mutants")
-        
         macros, specifications = ResponseParser.extract_macros_and_ltl_properties_file(updated_model)
 
         # Run the final specification on all mutants
         killed_mutants, surviving_mutants, specificationDict = Experiment.check_all_mutants(folder_name, mutants, specifications, macros, 'final')
-        
         experiment_result = Experiment.create_experiment_result(model, setup.number_iterations + 1, mutants, specificationDict)
+        
         experiment_result.log_iteration_to_file(result_file)
         if len(surviving_mutants) > 0:
             print(f"Surviving mutants after all iterations: {surviving_mutants}")
         else:
             print(f"All mutants have been killed for model {model}")
+            
+        # Delete killed and surviving mutants
+        for mutant in killed_mutants:
+            os.remove(mutant)
+        for mutant in surviving_mutants:
+            os.remove(mutant)
+
         print(f"Trying to simplify the specification for the model {updated_model}")
         simplified_specifications = SpecificationGenerator.simplify_specifications(updated_model, folder_name, mutants, experiment_result, chatGPTClient)
         print(f"Simplified specifications: {simplified_specifications}")
