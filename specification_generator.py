@@ -1,14 +1,12 @@
-
-
-import datetime
 import os
 import re
+from ChatGptClient import ChatGPTClient
+from experiment_result import ExperimentResult
 from spin_runner import Outcome, SpinRunner
 from query_builder import QueryBuilder
 from response_parser import ResponseParser
 
 class SpecificationGenerator:
-    
     @staticmethod
     def find_counter_example(model):
         """
@@ -26,7 +24,7 @@ class SpecificationGenerator:
             return None
     
     @staticmethod    
-    def refine_model(model, specifications, chatGPTClient):
+    def refine_model(model, specifications, add_examples : bool, chatGPTClient : ChatGPTClient):
         """
         Refines the given model by alternately checking the model with SPIN and enhancing the specifications using ChatGPT based on the feedback from SPIN.
         
@@ -69,13 +67,15 @@ class SpecificationGenerator:
             if verdict == Outcome.COMPILATION_ERROR:
                 print(f"Compilation error - trying to fix the model {model} by querying ChatGPT with the error message from SPIN.")
                 # Handle compilation errors using ChatGPT
-                query = QueryBuilder.fix_compilation_query(model, message)
+                query = QueryBuilder.fix_compilation_query(model, message, add_examples)
                 response = chatGPTClient.query_chatgpt(query)
+                code = ResponseParser.extract_promela_code(response)
+                
                 # Extract the updated specification from the response
-                _, specifications = ResponseParser.extract_macros_and_ltl_properties(response)
+                _, specifications = ResponseParser.extract_macros_and_ltl_properties(code)
                 # Save the response to the model file by overwriting the existing content
                 with open(model, 'w') as file:
-                    file.write(response)
+                    file.write(code)
             elif verdict == Outcome.VERIFICATION_ERROR:
                 print(f"Verification error - trying to fix the model {model} by querying ChatGPT with the error message from SPIN.")
                 # Keep track of the previously failed specifications
@@ -87,13 +87,15 @@ class SpecificationGenerator:
                 # Delete the counter-example file
                 os.remove(counter_example_file)    
                 # Query ChatGPT to fix the verification error
-                query = QueryBuilder.fix_verification_query(model, message, counter_example, previously_satisfied_specs, previously_failed_specs)
+                query = QueryBuilder.fix_verification_query(model, message, counter_example, add_examples, previously_satisfied_specs, previously_failed_specs)
                 response = chatGPTClient.query_chatgpt(query)
+                code = ResponseParser.extract_promela_code(response)
+                
                 # Extract the updated specification from the response
-                _, specifications = ResponseParser.extract_macros_and_ltl_properties(response)
+                _, specifications = ResponseParser.extract_macros_and_ltl_properties(code)
                 # Save the response to the model file by overwriting the existing content
                 with open(model, 'w') as file:
-                    file.write(response)
+                    file.write(code)
             elif verdict == Outcome.SUCCESS:
                 # If the model satisfies all LTL formulas
                 print(f"Success! The model {model} satisfies all LTL formulas.")
@@ -129,7 +131,7 @@ class SpecificationGenerator:
         return cleaned_content
 
     @staticmethod
-    def add_specification_to_model(folder, model : str, specifications, macros):
+    def add_specification_to_model(folder, model : str, specifications : dict, macros : dict, name_extension : str) -> str:
         """
         Add the given LTL specifications to the model file by creating a temporary file with the specifications.
         """
@@ -137,9 +139,14 @@ class SpecificationGenerator:
         if not os.path.exists(model):
             raise FileNotFoundError(f"Model file not found: {model}")
         
-        date = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
         file_name = os.path.basename(model)
-        file_name = file_name.replace('.pml', '_temp_' + date + '.pml')
+        # Remove previous extensions from the file name
+        file_name = file_name.replace('_specification', '')
+        file_name = file_name.replace('_enhanced', '')
+        # Also remove Iteration_1, Iteration_2, etc.
+        file_name = re.sub(r'_Iteration_\d+', '', file_name)
+        # Add the new extension
+        file_name = file_name.replace('.pml', '_'+ name_extension + '.pml')
         file_name = os.path.join(folder, file_name)
         with open(file_name, 'w') as file:
             model_content = ''
@@ -157,7 +164,7 @@ class SpecificationGenerator:
         return file_name
     
     @staticmethod
-    def simplify_specifications(model : str, model_folder : str, mutants : list, chatGPTClient):
+    def simplify_specifications(model : str, model_folder : str, mutants : list, experimentResult : ExperimentResult, chatGPTClient : ChatGPTClient):
         """
         Query ChatGPT to simplify the LTL specifications for the given model based on the surviving mutants.
         
@@ -168,12 +175,20 @@ class SpecificationGenerator:
         chatGPTClient (ChatGPTClient): The ChatGPT client to use for querying.
         """
         
-        query = QueryBuilder.simplify_query(model, mutants)
+        query = QueryBuilder.simplify_formulas_query(model, experimentResult)
         response = chatGPTClient.query_chatgpt(query)
+        macros, specifications = ResponseParser.parse_macros_and_specifications(response)
+        updated_model = SpecificationGenerator.add_specification_to_model(model_folder, model, specifications, macros, 'simplified')
+        
+        add_examples = False
+
+        SpecificationGenerator.refine_model(updated_model, specifications, add_examples, chatGPTClient)
+        
+        return updated_model
 
     
     @staticmethod
-    def create_specification_model(model : str, model_folder : str, trace_files : list, chatGPTClient) -> str:
+    def create_specification_model(model : str, model_folder : str, trace_files : list, add_examples : bool, chatGPTClient : ChatGPTClient) -> str:
         """
         Query ChatGPT to create a new LTL specification for the given model.
         
@@ -187,18 +202,18 @@ class SpecificationGenerator:
         str: The file path to the model with the added LTL specification.
         """
         
-        query = QueryBuilder.create_specification_query(model, trace_files)
+        query = QueryBuilder.create_specification_query(model, trace_files, add_examples)
         response = chatGPTClient.query_chatgpt(query)
         macros, specifications = ResponseParser.parse_macros_and_specifications(response)
-        updated_model = SpecificationGenerator.add_specification_to_model(model_folder, model, specifications, macros)
+        updated_model = SpecificationGenerator.add_specification_to_model(model_folder, model, specifications, macros, 'specification')
 
-        SpecificationGenerator.refine_model(updated_model, specifications, chatGPTClient)
+        SpecificationGenerator.refine_model(updated_model, specifications, add_examples, chatGPTClient)
         
         return updated_model
     
     
     @staticmethod
-    def enhance_specification(model : str, model_folder : str, mutants : list, specifications : list, chatGPTClient):
+    def enhance_specification(model : str, model_folder : str, mutants : list, specifications : list, add_examples : bool, chatGPTClient : ChatGPTClient, name_extension: str) -> str:
         """
         Query ChatGPT to enhance the LTL specification for the given model based on the surviving mutants.
         
@@ -215,8 +230,8 @@ class SpecificationGenerator:
         query = QueryBuilder.enhance_specification_query(model, mutants, specifications)
         response = chatGPTClient.query_chatgpt(query)
         macros, specifications = ResponseParser.parse_macros_and_specifications(response)
-        updated_model = SpecificationGenerator.add_specification_to_model(model_folder, model, specifications, macros)
+        updated_model = SpecificationGenerator.add_specification_to_model(model_folder, model, specifications, macros, name_extension)
 
-        SpecificationGenerator.refine_model(updated_model, specifications, chatGPTClient)
+        SpecificationGenerator.refine_model(updated_model, specifications, add_examples, chatGPTClient)
         
         return updated_model

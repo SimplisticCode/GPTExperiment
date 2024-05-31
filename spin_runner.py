@@ -2,6 +2,8 @@ import os
 import subprocess
 from enum import Enum
 
+from response_parser import ResponseParser
+
 class Outcome(Enum):
     COMPILATION_ERROR = 1
     VERIFICATION_ERROR = 2
@@ -40,6 +42,32 @@ class SpinRunner:
         trail_files = [f for f in os.listdir() if f.endswith('.trail')]
         for trail_file in trail_files:
             os.remove(trail_file)
+            
+    @staticmethod
+    def check_model_all_specs(model_path : str, specifications : dict) -> tuple:
+        """
+        A method to ensure that the promela model respects the specifications.
+        
+        Args:
+        model (TrainingData): The model to check.
+        specifications (Dict): The specifications to check against.
+        
+        Returns:
+        bool: True if the model respects the specifications, False otherwise.
+        """
+        satisfiedFormulas = []
+        dissatisfiedFormulas = []
+        for spec in specifications:
+            print(f"Checking model {model_path} against specification {spec}")
+            specs = {}
+            specs[spec] = specifications[spec]
+            verdict, _, _, _ = SpinRunner.check_model(model_path, specs)
+            if verdict == Outcome.SUCCESS:
+                satisfiedFormulas.append(spec)
+            else:
+                dissatisfiedFormulas.append(spec)
+                
+        return satisfiedFormulas, dissatisfiedFormulas
         
     @staticmethod
     def compile_model(model_path):
@@ -99,9 +127,32 @@ class SpinRunner:
         
         SpinRunner.remove_generated_files()    
         return surviving_mutants
+    
+    @staticmethod
+    def try_to_fix_uncompileable_model(file_name):
+        """
+        Tries to fix the model by removing the problematic code.
+        
+        Args:
+        file_name (str): The file path to the model.
+        
+        Returns:
+        str: The file path to the fixed model.
+        """
+        # Read the Promela code from the file
+        with open(file_name, 'r') as f:
+            promela_code = f.read()
+            f.close()
+            
+        code = ResponseParser.extract_promela_code(promela_code)
+        if code != promela_code:
+            print("The file has been fixed.")
+            open(file_name, 'w').write(code)
+        
+        return file_name
         
     @staticmethod
-    def check_model(file_name, formulas):
+    def check_model(file_name, formulas, try_to_fix=False):
         """
         A function to check if the model satisfies the given LTL formulas.
         
@@ -114,6 +165,10 @@ class SpinRunner:
         """
         satisfied_formulas = dict()
         could_compile, error_message = SpinRunner.compile_model(file_name)
+        if not could_compile and try_to_fix:
+            file_name = SpinRunner.try_to_fix_uncompileable_model(file_name)
+            could_compile, error_message = SpinRunner.compile_model(file_name)
+        
         if not could_compile:
             # The model could not be compiled
             return (Outcome.COMPILATION_ERROR, error_message, satisfied_formulas, None)

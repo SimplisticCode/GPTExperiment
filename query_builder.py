@@ -2,6 +2,7 @@ import os
 import textwrap
 
 from ChatGptClient import Prompt, PromptType
+from experiment_result import ExperimentResult
 from response_parser import ResponseParser
 
 class QueryBuilder:
@@ -102,13 +103,17 @@ class QueryBuilder:
         return output_format
     
     @staticmethod
-    def output_format_model() -> str:
+    def output_format_model(add_examples : bool) -> str:
         output_format = textwrap.dedent("""
             Output Format:
             {The corrected Promela model with the macros and LTL properties integrated}.
             DO NOT include anything else in the output and DO NOT use quotes around the macro names, definitions, or LTL properties.
         """)
-        return output_format + "\n\n" + QueryBuilder.examples(True)
+        
+        if add_examples:
+            return output_format + "\n\n" + QueryBuilder.examples(False)
+        else:
+            return output_format
     
         
     @staticmethod
@@ -567,7 +572,7 @@ class QueryBuilder:
 
                             
     @staticmethod
-    def append_model(query_parts, file_path):
+    def append_model(query_parts : list, file_path : str):
         """"
         Appends the original model and mutants to the query parts and joins them to return a complete query.
         
@@ -611,7 +616,7 @@ class QueryBuilder:
         return query
             
     @staticmethod
-    def build_standard_query(model, mutants) -> Prompt:
+    def build_standard_query(model : str, mutants: list, add_examples : bool) -> Prompt:
         query_parts = []
         objective = textwrap.dedent("""
             Objective: Develop a concise and intuitive LTL specification to distinguish the original Promela model from its mutants.
@@ -634,17 +639,18 @@ class QueryBuilder:
         query_parts.append(QueryBuilder.promela_specif_query())
         query_parts.append(QueryBuilder.append_promela_models(model, mutants))
         query_parts.append(QueryBuilder.output_format_query())
-        query_parts.append(QueryBuilder.examples(False))
+        if add_examples:
+            query_parts.append(QueryBuilder.examples(False))
         query = "".join(query_parts)
         prompt = Prompt(query, PromptType.CREATE_Specification, model)
         return prompt        
     
     @staticmethod
-    def construct_feedback_query(objective: str, model : str, spinFeedback : str, promptType : PromptType) -> Prompt:
+    def construct_feedback_query(objective: str, model : str, spinFeedback : str, add_examples : bool, promptType : PromptType) -> Prompt:
         query_parts = []
         query_parts.append(objective)
         query_parts.append(QueryBuilder.promela_specif_query())
-        outputFormat = QueryBuilder.output_format_model()
+        outputFormat = QueryBuilder.output_format_model(add_examples)
         query_parts.append(outputFormat)
         query_parts.append("Model to Fix:\n")
         QueryBuilder.append_model(query_parts, model)
@@ -656,7 +662,7 @@ class QueryBuilder:
         return prompt
         
     @staticmethod
-    def fix_compilation_query(model : str, spinFeedback : str) -> Prompt:
+    def fix_compilation_query(model : str, spinFeedback : str, add_examples : bool) -> Prompt:
         """
         This function constructs a query for ChatGPT to fix the compilation error in the provided Promela model based on the feedback from the SPIN model checker.
         
@@ -679,13 +685,14 @@ class QueryBuilder:
             Step 6. Ensure that all macros and LTL properties are correctly defined and do not conflict with each other and is satisfied by the model.
             Step 7. Integrate the corrected LTL properties and macros into the model.
             """)
-        prompt = QueryBuilder.construct_feedback_query(objective, model, spinFeedback, PromptType.FIX_CompileError)
+        prompt = QueryBuilder.construct_feedback_query(objective, model, spinFeedback, add_examples, PromptType.FIX_CompileError)
         return prompt
     
     @staticmethod
     def fix_verification_query(model : str, 
                                spinFeedback : str, 
                                counterExample : str, 
+                               add_examples : bool,
                                previously_satisfied_specs : dict, 
                                previously_failed_specs : dict) -> Prompt:
         """
@@ -712,7 +719,7 @@ class QueryBuilder:
         """)
         
         spinFeedback += "\n\nCounterexample:\n" + counterExample
-        prompt = QueryBuilder.construct_feedback_query(objective, model, spinFeedback, PromptType.FIX_VerificationError)
+        prompt = QueryBuilder.construct_feedback_query(objective, model, spinFeedback, add_examples, PromptType.FIX_VerificationError)
         
         # if len(previously_satisfied_specs) > 1:
         #     previously_satisfied_specs_str = "\nThe following LTL properties were previously satisfied by the model:\n"
@@ -725,7 +732,7 @@ class QueryBuilder:
         return prompt
     
     @staticmethod
-    def create_specification_query(model, trace_files) -> Prompt:
+    def create_specification_query(model, trace_files, add_examples : bool) -> Prompt:
         query_parts = []
 
         objective = textwrap.dedent("""
@@ -745,7 +752,8 @@ class QueryBuilder:
         query_parts.append(objective)
         query_parts.append(QueryBuilder.promela_specif_query())
         query_parts.append(QueryBuilder.output_format_query())
-        query_parts.append(QueryBuilder.examples(False))
+        if add_examples:
+            query_parts.append(QueryBuilder.examples(False))
 
         query_parts.append("Original Model:\n")
         QueryBuilder.append_model(query_parts, model)
@@ -762,7 +770,6 @@ class QueryBuilder:
         query = "".join(query_parts)
         prompt = Prompt(query, PromptType.CREATE_Specification, model)
         return prompt
-    
     
     @staticmethod
     def enhance_specification_query(model : str, surviving_mutants : str, specifications : list) -> Prompt:
@@ -794,6 +801,42 @@ class QueryBuilder:
         specification_parts += "\n".join(specifications)
         query_parts.append(specification_parts)
         
+        query = "".join(query_parts)
+        prompt = Prompt(query, PromptType.ENHANCE_Specification, model)
+        return prompt       
+    
+        
+    @staticmethod
+    def simplify_formulas_query(model : str, experiment_result : ExperimentResult) -> Prompt:
+        query_parts = []
+
+        objective = textwrap.dedent("""
+        Background: You have successfully created an LTL specification capable of distinguishing the original Promela model from its mutants.
+        Objective: Your task is to simplify the existing LTL specification to make it more concise and easier to understand while maintaining its correctness.
+        The goal is to reduce the complexity of the LTL properties without compromising their ability to distinguish the original model from the mutants.
+        Steps to Follow:
+        Step 1: Review the Existing LTL Properties: Analyze the existing LTL properties to identify redundant or overly complex properties.
+        Step 2: Study the Experiment Results: Review the experiment results to understand which mutants a specific LTL property kills 
+            a) Properties that kill many mutants are essential and should be kept.
+            b) Properties that kill zero mutants are redundant and can be removed.
+            c) Two properties that kill the same mutants are redundant, and can be combined or simplified.
+            d) Properties that kill only a few mutants may need to be refined or combined with other properties.
+        Step 3: Simplify LTL Properties: Simplify the LTL properties by removing redundancies, combining similar properties, and refining complex properties.
+        Step 4: Ensure Correctness: Verify that the simplified LTL properties are written in the correct Promela syntax and that they are satisfied by the model.
+        Step 5: Sort LTL Properties: Sort the LTL properties in order of complexity, starting with the simplest properties first.
+        """)
+        query_parts.append(objective)
+        query_parts.append(QueryBuilder.promela_specif_query())
+        query_parts.append(QueryBuilder.output_format_query())
+        
+        query_parts.append("Model with Specifications to Simplify:\n")
+        QueryBuilder.append_model(query_parts, model)
+        
+        query_parts.append("Experiment Results:\n")
+        for spec in experiment_result.specificationDict:
+            killed_mutant_names = [os.path.basename(mutant) for mutant in spec.killed_mutants]
+            query_parts.append(f"Specification: {spec.specification}, Number of Killed Mutants: {spec.num_killed_mutants} - {killed_mutant_names} Mutation Score: {spec.mutation_score}\n")
+
         query = "".join(query_parts)
         prompt = Prompt(query, PromptType.ENHANCE_Specification, model)
         return prompt       

@@ -106,9 +106,28 @@ class ResponseParser:
         start_index = response.index(clause) + len(clause)
         end_index = response.index("}", start_index) + 1
         return response[start_index:end_index].strip()
+    
+    @staticmethod
+    def extract_promela_code(text:str) -> str:
+        # Regex pattern to match Promela code blocks
+        promela_pattern = re.compile(r"```promela\n(.*?)\n```", re.DOTALL)
+        # Extract all matches
+        matches = promela_pattern.findall(text)
+        
+        if not matches:
+            quotes_pattern = re.compile(r"```\n(.*?)\n```", re.DOTALL)
+            matches = quotes_pattern.findall(text)
+            # if no matches found, return the original text
+            if not matches:
+                return text
+            
+        #  Otherwise return the longest promela code block
+        code = max(matches, key=len, default="")
+
+        return code
 
     @staticmethod
-    def parse_macros_and_specifications(input_text):
+    def parse_macros_and_specifications(input_text:str) -> tuple:
         """
         Parses the response from ChatGPT to extract the LTL formula.
         The response should contain the macros and the LTL specification.

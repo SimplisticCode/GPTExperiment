@@ -56,7 +56,7 @@ The tool also requires the [Spin](http://spinroot.com/spin/whatispin.html) model
 To generate LTL formulas using ChatGPT, run the following command:
 
 ```bash
-python3 experiment.py -model_dir=<model_dir> -api_key=<api_key> --iterations <no_iterations>[--examples_in_query] [--mutants_in_query]
+python3 experiment.py -model_dir=<model_dir> -api_key=<api_key> --iterations <no_iterations> [--examples_in_query] [--mutants_in_query]
 ```
 
 where 
@@ -69,19 +69,25 @@ where
 The script will generate LTL formulas for the Promela models in the `Models` directory and store the results in the `Results` directory.
 The 
 
-# Example
+### Example
 
 An example of running the experiment is as follows:
 
 ```bash
-python3 experiment.py -model_dir=/Models/ -api_key=<api_key> --iterations 3 --examples_in_query --mutants_in_query 
+python3 experiment.py -model_dir=Models/Experiment_2 -api_key=<api_key> --iterations 3 --examples_in_query --mutants_in_query 
 ```
 
 This command will run the experiment for 3 iterations using the models in the `Models` directory and the specified API key. The query to the OpenAI API will include examples and the mutants.
 
-## Results
+### Example Results
 
 The results of the experiment are stored in the [Results](/Results/) directory. Each experiment is stored in a separate subdirectory with the following structure:
+
+- `Experiment_<experiment_number>`: The directory containing the results of the experiment.
+    - `killed_mutants`: This directory contains the mutants that were killed by the generated LTL formulas.
+    - `surviving`: This directory contains the mutants that were not killed by the generated LTL formulas.
+    - `[ModelName]_results.txt`: The file is a summary of the results of the experiment for the model `[ModelName]`.
+
 
 
 ## License
