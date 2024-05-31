@@ -47,7 +47,7 @@ pip install -r requirements.txt
 ```
 
 ### Additional Tools Required
-The tool also requires the [Daedalux](A tool for generating mutants and traces for Promela models) tool to generate mutants and traces for the Promela models. The tool is included in the `libs` directory and is compiled for Linux and MacOS. If you are using Windows, you will need to compile the tool yourself.
+The tool also requires the [Daedalux](https://github.com/samilazregsuidi/Daedalux) tool to generate mutants and traces for the Promela models. The tool is included in the `libs` directory and is compiled for Linux and MacOS. If you are using Windows, you will need to compile the tool yourself.
 
 The tool also requires the [Spin](http://spinroot.com/spin/whatispin.html) model checker to evaluate the generated LTL formulas. The tool is installed in the docker image used in the experiment. If you are not using the docker image, you will need to install Spin yourself.
 
@@ -56,18 +56,34 @@ The tool also requires the [Spin](http://spinroot.com/spin/whatispin.html) model
 To generate LTL formulas using ChatGPT, run the following command:
 
 ```bash
-python3 experiment.py -model_dir <model_dir> -api_key <api_key> 
+python3 experiment.py -model_dir=<model_dir> -api_key=<api_key> --iterations <no_iterations>[--examples_in_query] [--mutants_in_query]
 ```
 
 where 
 * `<model_dir>` is the path to the directory containing the ChatGPT model 
 * `<api_key>` is an API key for the OpenAI API - you can get one by signing up at [OpenAI](https://platform.openai.com/).
-* `<model_dir>` is the path to the directory containing the Promela models.
+* `<no_iterations>` is the maximal number of interactions the program will have with the OpenAI API to generate the LTL formulas to distinguish between the original model and the mutants.
+* `--examples_in_query` is a flag indicating whether to include examples in the query to the OpenAI API to show how a similar query could be answered.
+* `--mutants_in_query` is a flag indicating whether to the query should include the mutants.
 
 The script will generate LTL formulas for the Promela models in the `Models` directory and store the results in the `Results` directory.
 The 
 
 # Example
+
+An example of running the experiment is as follows:
+
 ```bash
-python3 experiment.py -model_dir=/Models/ -api_key <api_key>
+python3 experiment.py -model_dir=/Models/ -api_key=<api_key> --iterations 3 --examples_in_query --mutants_in_query 
 ```
+
+This command will run the experiment for 3 iterations using the models in the `Models` directory and the specified API key. The query to the OpenAI API will include examples and the mutants.
+
+## Results
+
+The results of the experiment are stored in the [Results](/Results/) directory. Each experiment is stored in a separate subdirectory with the following structure:
+
+
+## License
+
+The code is written at the University of Luxembourg and is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.

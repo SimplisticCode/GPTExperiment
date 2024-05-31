@@ -246,10 +246,10 @@ class Experiment:
 def main():
     parser = argparse.ArgumentParser(description="Specification Mining Experiments")
     parser.add_argument("-model_dir", help="The directory containing the Promela models to be used in the experiment.", type=str, default="Models/Experiment_2")
+    parser.add_argument("-api_key", help="The API key for the ChatGPT model.", type=str, required=True)
     parser.add_argument("--examples_in_query", help="Include examples in the query to the GPT model.", action="store_true", default=True)
     parser.add_argument("--iterations", help="The number of iteration rounds for killing all mutants.", type=int, default=3)
     parser.add_argument("--mutants_in_query", help="Include mutants in the query to the GPT model.", action="store_true", default=False)
-    parser.add_argument("--api_key_chat_gpt", help="The API key for the ChatGPT model.", type=str, required=True)
     args = parser.parse_args()
     setup = ExperimentSetup(args.examples_in_query, args.mutants_in_query, args.api_key_chat_gpt, args.iterations)
     Experiment.run_experiments(setup, args.model_dir)
