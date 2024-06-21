@@ -1,0 +1,43 @@
+Iteration: 1
+Model: Models/Experiment_1/mutex.pml, Number of Killed Mutants: 12, Number of Surviving Mutants: 10
+Specification: mutual_exclusion, Number of Killed Mutants: 4 - ['mutant_2.pml', 'mutant_11.pml', 'mutant_13.pml', 'mutant_22.pml'] Mutation Score: 0.18181818181818182
+Specification: flag_validity, Number of Killed Mutants: 4 - ['mutant_2.pml', 'mutant_11.pml', 'mutant_13.pml', 'mutant_22.pml'] Mutation Score: 0.18181818181818182
+Specification: turn_validity, Number of Killed Mutants: 4 - ['mutant_2.pml', 'mutant_11.pml', 'mutant_13.pml', 'mutant_22.pml'] Mutation Score: 0.18181818181818182
+Specification: eventual_entry_A, Number of Killed Mutants: 6 - ['mutant_16.pml', 'mutant_17.pml', 'mutant_18.pml', 'mutant_19.pml', 'mutant_20.pml', 'mutant_21.pml'] Mutation Score: 0.2727272727272727
+Specification: eventual_entry_B, Number of Killed Mutants: 16 - ['mutant_1.pml', 'mutant_2.pml', 'mutant_3.pml', 'mutant_5.pml', 'mutant_6.pml', 'mutant_7.pml', 'mutant_8.pml', 'mutant_9.pml', 'mutant_10.pml', 'mutant_13.pml', 'mutant_16.pml', 'mutant_17.pml', 'mutant_18.pml', 'mutant_19.pml', 'mutant_20.pml', 'mutant_21.pml'] Mutation Score: 0.7272727272727273
+Specification: flag_reset_A, Number of Killed Mutants: 12 - ['mutant_2.pml', 'mutant_6.pml', 'mutant_7.pml', 'mutant_11.pml', 'mutant_13.pml', 'mutant_16.pml', 'mutant_17.pml', 'mutant_18.pml', 'mutant_19.pml', 'mutant_20.pml', 'mutant_21.pml', 'mutant_22.pml'] Mutation Score: 0.5454545454545454
+Specification: flag_reset_B, Number of Killed Mutants: 12 - ['mutant_2.pml', 'mutant_6.pml', 'mutant_7.pml', 'mutant_8.pml', 'mutant_9.pml', 'mutant_10.pml', 'mutant_11.pml', 'mutant_13.pml', 'mutant_16.pml', 'mutant_17.pml', 'mutant_18.pml', 'mutant_22.pml'] Mutation Score: 0.5454545454545454
+Surviving Mutants: ['mutant_1.pml', 'mutant_3.pml', 'mutant_4.pml', 'mutant_5.pml', 'mutant_12.pml', 'mutant_14.pml', 'mutant_15.pml', 'mutant_19.pml', 'mutant_20.pml', 'mutant_21.pml']
+
+Iteration: 2
+Model: Models/Experiment_1/mutex.pml, Number of Killed Mutants: 0, Number of Surviving Mutants: 4
+Specification: mutual_exclusion, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: flag_validity, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: turn_validity, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: eventual_entry_A, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: eventual_entry_B, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: flag_reset_A, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: flag_reset_B, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: flag_reset_after_critical_A, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: flag_reset_after_critical_B, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Surviving Mutants: ['mutant_4_Iteration_1.pml', 'mutant_12_Iteration_1.pml', 'mutant_14_Iteration_1.pml', 'mutant_15_Iteration_1.pml']
+
+Iteration: 3
+Model: Models/Experiment_1/mutex.pml, Number of Killed Mutants: 12, Number of Surviving Mutants: 10
+Specification: mutual_exclusion, Number of Killed Mutants: 4 - ['mutant_2.pml', 'mutant_11.pml', 'mutant_13.pml', 'mutant_22.pml'] Mutation Score: 0.18181818181818182
+Specification: flag_validity, Number of Killed Mutants: 4 - ['mutant_2.pml', 'mutant_11.pml', 'mutant_13.pml', 'mutant_22.pml'] Mutation Score: 0.18181818181818182
+Specification: turn_validity, Number of Killed Mutants: 4 - ['mutant_2.pml', 'mutant_11.pml', 'mutant_13.pml', 'mutant_22.pml'] Mutation Score: 0.18181818181818182
+Specification: eventual_entry_A, Number of Killed Mutants: 6 - ['mutant_16.pml', 'mutant_17.pml', 'mutant_18.pml', 'mutant_19.pml', 'mutant_20.pml', 'mutant_21.pml'] Mutation Score: 0.2727272727272727
+Specification: eventual_entry_B, Number of Killed Mutants: 16 - ['mutant_1.pml', 'mutant_2.pml', 'mutant_3.pml', 'mutant_5.pml', 'mutant_6.pml', 'mutant_7.pml', 'mutant_8.pml', 'mutant_9.pml', 'mutant_10.pml', 'mutant_13.pml', 'mutant_16.pml', 'mutant_17.pml', 'mutant_18.pml', 'mutant_19.pml', 'mutant_20.pml', 'mutant_21.pml'] Mutation Score: 0.7272727272727273
+Specification: flag_reset_A, Number of Killed Mutants: 12 - ['mutant_2.pml', 'mutant_6.pml', 'mutant_7.pml', 'mutant_11.pml', 'mutant_13.pml', 'mutant_16.pml', 'mutant_17.pml', 'mutant_18.pml', 'mutant_19.pml', 'mutant_20.pml', 'mutant_21.pml', 'mutant_22.pml'] Mutation Score: 0.5454545454545454
+Specification: flag_reset_B, Number of Killed Mutants: 12 - ['mutant_2.pml', 'mutant_6.pml', 'mutant_7.pml', 'mutant_8.pml', 'mutant_9.pml', 'mutant_10.pml', 'mutant_11.pml', 'mutant_13.pml', 'mutant_16.pml', 'mutant_17.pml', 'mutant_18.pml', 'mutant_22.pml'] Mutation Score: 0.5454545454545454
+Specification: flag_reset_after_critical_A, Number of Killed Mutants: 12 - ['mutant_2.pml', 'mutant_6.pml', 'mutant_7.pml', 'mutant_11.pml', 'mutant_13.pml', 'mutant_16.pml', 'mutant_17.pml', 'mutant_18.pml', 'mutant_19.pml', 'mutant_20.pml', 'mutant_21.pml', 'mutant_22.pml'] Mutation Score: 0.5454545454545454
+Specification: flag_reset_after_critical_B, Number of Killed Mutants: 12 - ['mutant_2.pml', 'mutant_6.pml', 'mutant_7.pml', 'mutant_8.pml', 'mutant_9.pml', 'mutant_10.pml', 'mutant_11.pml', 'mutant_13.pml', 'mutant_16.pml', 'mutant_17.pml', 'mutant_18.pml', 'mutant_22.pml'] Mutation Score: 0.5454545454545454
+Specification: flag_reset_after_critical_A_strict, Number of Killed Mutants: 12 - ['mutant_2.pml', 'mutant_6.pml', 'mutant_7.pml', 'mutant_11.pml', 'mutant_13.pml', 'mutant_16.pml', 'mutant_17.pml', 'mutant_18.pml', 'mutant_19.pml', 'mutant_20.pml', 'mutant_21.pml', 'mutant_22.pml'] Mutation Score: 0.5454545454545454
+Specification: flag_reset_after_critical_B_strict, Number of Killed Mutants: 12 - ['mutant_2.pml', 'mutant_6.pml', 'mutant_7.pml', 'mutant_8.pml', 'mutant_9.pml', 'mutant_10.pml', 'mutant_11.pml', 'mutant_13.pml', 'mutant_16.pml', 'mutant_17.pml', 'mutant_18.pml', 'mutant_22.pml'] Mutation Score: 0.5454545454545454
+Specification: turn_update_after_critical_A, Number of Killed Mutants: 16 - ['mutant_2.pml', 'mutant_6.pml', 'mutant_7.pml', 'mutant_8.pml', 'mutant_9.pml', 'mutant_10.pml', 'mutant_11.pml', 'mutant_12.pml', 'mutant_13.pml', 'mutant_14.pml', 'mutant_16.pml', 'mutant_17.pml', 'mutant_19.pml', 'mutant_20.pml', 'mutant_21.pml', 'mutant_22.pml'] Mutation Score: 0.7272727272727273
+Specification: turn_update_after_critical_B, Number of Killed Mutants: 17 - ['mutant_1.pml', 'mutant_2.pml', 'mutant_3.pml', 'mutant_5.pml', 'mutant_6.pml', 'mutant_8.pml', 'mutant_9.pml', 'mutant_10.pml', 'mutant_11.pml', 'mutant_13.pml', 'mutant_16.pml', 'mutant_17.pml', 'mutant_18.pml', 'mutant_19.pml', 'mutant_20.pml', 'mutant_21.pml', 'mutant_22.pml'] Mutation Score: 0.7727272727272727
+Specification: no_reentry_without_reset_A, Number of Killed Mutants: 12 - ['mutant_2.pml', 'mutant_6.pml', 'mutant_7.pml', 'mutant_11.pml', 'mutant_13.pml', 'mutant_16.pml', 'mutant_17.pml', 'mutant_18.pml', 'mutant_19.pml', 'mutant_20.pml', 'mutant_21.pml', 'mutant_22.pml'] Mutation Score: 0.5454545454545454
+Specification: no_reentry_without_reset_B, Number of Killed Mutants: 12 - ['mutant_2.pml', 'mutant_6.pml', 'mutant_7.pml', 'mutant_8.pml', 'mutant_9.pml', 'mutant_10.pml', 'mutant_11.pml', 'mutant_13.pml', 'mutant_16.pml', 'mutant_17.pml', 'mutant_18.pml', 'mutant_22.pml'] Mutation Score: 0.5454545454545454
+Surviving Mutants: ['mutant_1.pml', 'mutant_3.pml', 'mutant_4.pml', 'mutant_5.pml', 'mutant_12.pml', 'mutant_14.pml', 'mutant_15.pml', 'mutant_19.pml', 'mutant_20.pml', 'mutant_21.pml']
+

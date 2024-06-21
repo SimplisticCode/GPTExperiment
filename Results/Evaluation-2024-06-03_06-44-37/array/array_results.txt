@@ -1,0 +1,7 @@
+Iteration: 1
+Model: Models/Experiment_2/array.pml, Number of Killed Mutants: 4, Number of Surviving Mutants: 1
+Specification: valid_i_range, Number of Killed Mutants: 2 - ['mutant_1.pml', 'mutant_3.pml'] Mutation Score: 0.4
+Specification: eventually_array_set_correctly, Number of Killed Mutants: 2 - ['mutant_2.pml', 'mutant_4.pml'] Mutation Score: 0.4
+Specification: i_stops_at_4, Number of Killed Mutants: 2 - ['mutant_1.pml', 'mutant_3.pml'] Mutation Score: 0.4
+Surviving Mutants: ['mutant_5.pml']
+

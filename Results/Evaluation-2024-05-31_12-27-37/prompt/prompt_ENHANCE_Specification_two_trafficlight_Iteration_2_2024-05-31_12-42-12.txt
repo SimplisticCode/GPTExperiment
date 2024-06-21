@@ -1,0 +1,145 @@
+The prompt to ChatGPT is:
+
+You are a specialized assistant in computer science with deep expertise in the SPIN model checker, model checking and temporal logic.
+You are tasked with enhancing the existing LTL specifications for a Promela model to improve the verification results and eliminate more mutants.
+You should use your expertise to analyze the existing LTL properties and the mutants to identify areas for improvement and refinement.
+Start by reviewing the existing LTL properties to ensure they accurately capture the desired behavior of the model and distinguish it from incorrect behaviors expressed by the mutants.
+Identify any weaknesses or gaps in the existing properties that may allow mutants to pass verification and refine the properties to address these issues.
+You should not change the existing properties, but enhance them by adding new properties to cover the identified gaps and strengthen the verification process.
+
+An LTL formula is a formula in Linear Temporal Logic (LTL) that describes the behavior of a system over time.
+You can only refer to global variables in the LTL formula and not local variables defined within processes.
+Use temporal logic operators like 'U' (until), '<>' (eventually), and '[]' (always) to express properties, but try to avoid the 'X' operator.
+Avoid mentioning past values of variables and consider the default values of variables (ints are initialized to 0, bools to false).
+Also, avoid properties on channel variables.
+
+
+Background: You have successfully created an LTL specification capable of distinguishing the original Promela model from its mutants.
+Objective: Your task is to simplify the existing LTL specification to make it more concise and easier to understand while maintaining its correctness.
+The goal is to reduce the complexity of the LTL properties without compromising their ability to distinguish the original model from the mutants.
+Steps to Follow:
+Step 1: Review the Existing LTL Properties: Analyze the existing LTL properties to identify redundant or overly complex properties.
+Step 2: Study the Experiment Results: Review the experiment results to understand which mutants a specific LTL property kills 
+    a) Properties that kill many mutants are essential and should be kept.
+    b) Properties that kill zero mutants are redundant and can be removed.
+    c) Two properties that kill the same mutants are redundant, and can be combined or simplified.
+    d) Properties that kill only a few mutants may need to be refined or combined with other properties.
+    e) Leave meaningful properties that describe obvious behavior of the model even if they do not kill any mutants.
+Step 3: Simplify LTL Properties: Simplify the LTL properties by removing redundancies, combining similar properties, and refining complex properties.
+Step 4: Ensure Correctness: Verify that the simplified LTL properties are written in the correct Promela syntax and that they are satisfied by the model.
+Step 5: Sort LTL Properties: Sort the LTL properties in order of complexity, starting with the simplest properties first.
+
+Guidelines/Criteria:
+- Only Global Variables: Ensure that the LTL properties only refer to global variables and not local variables defined within processes.
+- Temporal Logic Operators: Utilize 'U' (until), '<>' (eventually), and '[]' (always) effectively to express properties.
+    - Avoid the 'X' Operator: Instead use 'U' or '<>' to capture future behavior accurately.
+- Variable Values: Remember to handle variable values appropriately, noting that:
+    - Variables can only take one value at a time.
+    - You can only refer to future values using operators like '<>', 'U', 'W', not past values.
+    - Consider default var iable values (ints are initialized to 0, bools to false).
+- Process Interleaving: Consider how the interleaving of processes might influence LTL properties.
+    - Interleaving may lead to an execution where a process never get the chance to react to a specific event as it gets preempted by another process that removes the event.
+    - Ensure that the LTL properties are robust to the interleaving of processes.
+    - The classical trick is to add more assumptions in the LTL properties to account for the interleaving.
+- Avoid properties involving that a channel is sending or receiving.
+- State Changes: Two processes cannot change state simultaneously unless they synchronize on a channel.
+- Labels can be used to refer to specific states in the model and be used in the LTL properties. For example, 'critical:' can be a label for a state where a process is in a critical section.
+- Variable ranges: Ensure that LTL properties account for the valid values of variables in the model.
+- Variable Changes: Write properties that capture how variables are allowed to change over time.
+- Array Indexing: Remember that arrays in Promela are zero-indexed, and the last element/index is the size of the array minus one.
+- Non-determinism: Ensure that the LTL properties are robust to the non-deterministic choices in the model.
+    - Non-deterministic choices can lead to different executions of the model and should be considered in the LTL properties as nothing is guaranteed to happen.
+    - For example, if a process can choose between two actions, the LTL property should not assume a specific choice will ever be made, especially if there is also interleaving in the model.
+    - One way to address this problem is to only refer to variables controlled by a single process in the LTL properties.
+- Macros: 
+    - Macros are used for complex predicates that cannot expressed directly inside an LTL formula.
+    - Macros can only refer to global variables and other macros. Local variables can be passed as arguments to macros.
+- LTL Properties: Ensure that the LTL properties are written in the correct Promela syntax.
+    - Operators: true, false, predicates and macros names.
+    - Unary operators: '!', '[]', '<>'.
+    - Binary operators: '&&', '||', '->', 'U', 'W', 'V', '->', '<->'.
+    - Avoid vacuously true properties: like '[] false', 'true U false' or 'p -> p'.
+- Avoid Redundancy:
+    - Each macro and LTL property should have a distinct and necessary role in the specification.
+    - Two LTL properties should not express the same condition or behavior.
+    - Two macros should not have the same definition or purpose.
+- Simple Properties: Break complex properties into multiple simple properties for clarity and ease of understanding.
+
+Output Format:
+Macros: {A map of key-value pair linking each macro name to its definition in SPIN's syntax}. For example, {is_red: (state == red), is_yellow: (state == yellow)}.
+Specification: {A map of key-value pair linking each LTL property to its definition in SPIN's syntax}. For example, {always_red: [] is_red, eventually_green: <> is_green}.
+Bisimilarity: {A list of mutants that are bisimilar to the original model}.
+DO NOT include anything else in the output and DO NOT use quotes around the macro names or definitions.
+
+Output Example:
+Macros: {is_red: (state == red), is_yellow: (state == yellow), x_gt_5: (x > 5)}
+Specification: {red_until_yellow: [] is_red -> (is_red U is_yellow), always_red: [] is_red, eventually_yellow: <> is_yellow}
+Bisimilarity: {mutant1.pml, mutant2.pml}
+Model with Specifications to Simplify:
+#define is_red1 (state1 == red)
+#define is_yellow1 (state1 == yellow)
+#define is_green1 (state1 == green)
+#define is_red2 (state2 == red)
+#define is_yellow2 (state2 == yellow)
+#define is_green2 (state2 == green)
+
+ltl always_valid_states { [] ((is_red1 || is_yellow1 || is_green1) && (is_red2 || is_yellow2 || is_green2)) }
+ltl red1_until_green1 { [] is_red1 -> (is_red1 U is_green1) }
+ltl green1_until_yellow1 { [] is_green1 -> (is_green1 U is_yellow1) }
+ltl yellow1_until_red1 { [] is_yellow1 -> (is_yellow1 U is_red1) }
+ltl red2_until_green2 { [] is_red2 -> (is_red2 U is_green2) }
+ltl green2_until_yellow2 { [] is_green2 -> (is_green2 U is_yellow2) }
+ltl yellow2_until_red2 { [] is_yellow2 -> (is_yellow2 U is_red2) }
+ltl eventually_green1 { <> is_green1 }
+ltl eventually_yellow1 { <> is_yellow1 }
+ltl eventually_red1 { <> is_red1 }
+ltl eventually_green2 { <> is_green2 }
+ltl eventually_yellow2 { <> is_yellow2 }
+ltl eventually_red2 { <> is_red2 }
+ltl mutual_exclusion { [] !(is_green1 && is_green2) }
+
+
+ltl red1_yellow2_until_green1 { [] ((is_red1 && is_yellow2) -> <> is_green1) }
+ltl green1_red2_until_yellow1 { [] ((is_green1 && is_red2) -> <> is_yellow1) }
+
+mtype = {green, yellow, red}
+
+mtype state1 = red;
+mtype state2 = green;
+
+active proctype light1() {
+	do
+	:: state1 == red  && state2 == yellow -> state1 = green;
+	:: state1 == green && state2 == red -> state1 = yellow;
+	:: state1 == yellow && state2 == green -> state1 = red;
+	od;
+}
+
+active proctype light2() {
+	do
+	:: state2 == red && state1 == yellow -> state2 = green;
+	:: state2 == green && state1 == red -> state2 = yellow;
+	:: state2 == yellow && state1 == green -> state2 = red;
+	od;
+}
+Experiment Results:
+Specification: always_valid_states, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: red1_until_green1, Number of Killed Mutants: 14 - ['mutant_1.pml', 'mutant_2.pml', 'mutant_3.pml', 'mutant_5.pml', 'mutant_6.pml', 'mutant_7.pml', 'mutant_9.pml', 'mutant_37.pml', 'mutant_38.pml', 'mutant_39.pml', 'mutant_41.pml', 'mutant_43.pml', 'mutant_44.pml', 'mutant_49.pml'] Mutation Score: 0.25925925925925924
+Specification: green1_until_yellow1, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: yellow1_until_red1, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: red2_until_green2, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: green2_until_yellow2, Number of Killed Mutants: 9 - ['mutant_4.pml', 'mutant_6.pml', 'mutant_7.pml', 'mutant_37.pml', 'mutant_38.pml', 'mutant_39.pml', 'mutant_41.pml', 'mutant_43.pml', 'mutant_45.pml'] Mutation Score: 0.16666666666666666
+Specification: yellow2_until_red2, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: eventually_green1, Number of Killed Mutants: 16 - ['mutant_1.pml', 'mutant_2.pml', 'mutant_3.pml', 'mutant_5.pml', 'mutant_6.pml', 'mutant_7.pml', 'mutant_8.pml', 'mutant_9.pml', 'mutant_37.pml', 'mutant_38.pml', 'mutant_39.pml', 'mutant_41.pml', 'mutant_43.pml', 'mutant_44.pml', 'mutant_45.pml', 'mutant_49.pml'] Mutation Score: 0.2962962962962963
+Specification: eventually_yellow1, Number of Killed Mutants: 29 - ['mutant_1.pml', 'mutant_2.pml', 'mutant_3.pml', 'mutant_4.pml', 'mutant_5.pml', 'mutant_6.pml', 'mutant_7.pml', 'mutant_9.pml', 'mutant_10.pml', 'mutant_12.pml', 'mutant_14.pml', 'mutant_16.pml', 'mutant_17.pml', 'mutant_18.pml', 'mutant_31.pml', 'mutant_34.pml', 'mutant_37.pml', 'mutant_38.pml', 'mutant_39.pml', 'mutant_41.pml', 'mutant_43.pml', 'mutant_44.pml', 'mutant_46.pml', 'mutant_48.pml', 'mutant_49.pml', 'mutant_50.pml', 'mutant_52.pml', 'mutant_53.pml', 'mutant_54.pml'] Mutation Score: 0.5370370370370371
+Specification: eventually_red1, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: eventually_green2, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: eventually_yellow2, Number of Killed Mutants: 10 - ['mutant_4.pml', 'mutant_6.pml', 'mutant_7.pml', 'mutant_37.pml', 'mutant_38.pml', 'mutant_39.pml', 'mutant_41.pml', 'mutant_43.pml', 'mutant_44.pml', 'mutant_45.pml'] Mutation Score: 0.18518518518518517
+Specification: eventually_red2, Number of Killed Mutants: 23 - ['mutant_1.pml', 'mutant_2.pml', 'mutant_3.pml', 'mutant_4.pml', 'mutant_5.pml', 'mutant_6.pml', 'mutant_7.pml', 'mutant_8.pml', 'mutant_9.pml', 'mutant_13.pml', 'mutant_15.pml', 'mutant_37.pml', 'mutant_38.pml', 'mutant_39.pml', 'mutant_41.pml', 'mutant_43.pml', 'mutant_45.pml', 'mutant_46.pml', 'mutant_48.pml', 'mutant_50.pml', 'mutant_52.pml', 'mutant_53.pml', 'mutant_54.pml'] Mutation Score: 0.42592592592592593
+Specification: mutual_exclusion, Number of Killed Mutants: 6 - ['mutant_4.pml', 'mutant_6.pml', 'mutant_7.pml', 'mutant_26.pml', 'mutant_31.pml', 'mutant_34.pml'] Mutation Score: 0.1111111111111111
+Specification: red1_yellow2_until_green1, Number of Killed Mutants: 9 - ['mutant_1.pml', 'mutant_2.pml', 'mutant_3.pml', 'mutant_5.pml', 'mutant_6.pml', 'mutant_7.pml', 'mutant_8.pml', 'mutant_9.pml', 'mutant_49.pml'] Mutation Score: 0.16666666666666666
+Specification: green1_red2_until_yellow1, Number of Killed Mutants: 8 - ['mutant_10.pml', 'mutant_12.pml', 'mutant_14.pml', 'mutant_16.pml', 'mutant_17.pml', 'mutant_18.pml', 'mutant_31.pml', 'mutant_34.pml'] Mutation Score: 0.14814814814814814
+The response from ChatGPT is:
+Macros: {is_red1: (state1 == red), is_yellow1: (state1 == yellow), is_green1: (state1 == green), is_red2: (state2 == red), is_yellow2: (state2 == yellow), is_green2: (state2 == green)}
+Specification: {red1_until_green1: [] is_red1 -> (is_red1 U is_green1), eventually_green1: <> is_green1, eventually_yellow1: <> is_yellow1, eventually_red2: <> is_red2, eventually_yellow2: <> is_yellow2, mutual_exclusion: [] !(is_green1 && is_green2), red1_yellow2_until_green1: [] ((is_red1 && is_yellow2) -> <> is_green1), green1_red2_until_yellow1: [] ((is_green1 && is_red2) -> <> is_yellow1)}
+Bisimilarity: {mutant_11.pml, mutant_19.pml, mutant_20.pml, mutant_21.pml, mutant_22.pml, mutant_23.pml, mutant_24.pml, mutant_25.pml, mutant_27.pml, mutant_28.pml, mutant_29.pml, mutant_30.pml, mutant_32.pml, mutant_33.pml, mutant_35.pml, mutant_36.pml, mutant_40.pml, mutant_42.pml, mutant_47.pml, mutant_51.pml}

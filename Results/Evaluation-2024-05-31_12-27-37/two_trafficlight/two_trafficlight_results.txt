@@ -1,0 +1,56 @@
+Iteration: 1
+Model: Models/Experiment_4/two_trafficlight.pml, Number of Killed Mutants: 34, Number of Surviving Mutants: 20
+Specification: always_valid_states, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: red1_until_green1, Number of Killed Mutants: 14 - ['mutant_1.pml', 'mutant_2.pml', 'mutant_3.pml', 'mutant_5.pml', 'mutant_6.pml', 'mutant_7.pml', 'mutant_9.pml', 'mutant_37.pml', 'mutant_38.pml', 'mutant_39.pml', 'mutant_41.pml', 'mutant_43.pml', 'mutant_44.pml', 'mutant_49.pml'] Mutation Score: 0.25925925925925924
+Specification: green1_until_yellow1, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: yellow1_until_red1, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: red2_until_green2, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: green2_until_yellow2, Number of Killed Mutants: 9 - ['mutant_4.pml', 'mutant_6.pml', 'mutant_7.pml', 'mutant_37.pml', 'mutant_38.pml', 'mutant_39.pml', 'mutant_41.pml', 'mutant_43.pml', 'mutant_45.pml'] Mutation Score: 0.16666666666666666
+Specification: yellow2_until_red2, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: eventually_green1, Number of Killed Mutants: 16 - ['mutant_1.pml', 'mutant_2.pml', 'mutant_3.pml', 'mutant_5.pml', 'mutant_6.pml', 'mutant_7.pml', 'mutant_8.pml', 'mutant_9.pml', 'mutant_37.pml', 'mutant_38.pml', 'mutant_39.pml', 'mutant_41.pml', 'mutant_43.pml', 'mutant_44.pml', 'mutant_45.pml', 'mutant_49.pml'] Mutation Score: 0.2962962962962963
+Specification: eventually_yellow1, Number of Killed Mutants: 29 - ['mutant_1.pml', 'mutant_2.pml', 'mutant_3.pml', 'mutant_4.pml', 'mutant_5.pml', 'mutant_6.pml', 'mutant_7.pml', 'mutant_9.pml', 'mutant_10.pml', 'mutant_12.pml', 'mutant_14.pml', 'mutant_16.pml', 'mutant_17.pml', 'mutant_18.pml', 'mutant_31.pml', 'mutant_34.pml', 'mutant_37.pml', 'mutant_38.pml', 'mutant_39.pml', 'mutant_41.pml', 'mutant_43.pml', 'mutant_44.pml', 'mutant_46.pml', 'mutant_48.pml', 'mutant_49.pml', 'mutant_50.pml', 'mutant_52.pml', 'mutant_53.pml', 'mutant_54.pml'] Mutation Score: 0.5370370370370371
+Specification: eventually_red1, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: eventually_green2, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: eventually_yellow2, Number of Killed Mutants: 10 - ['mutant_4.pml', 'mutant_6.pml', 'mutant_7.pml', 'mutant_37.pml', 'mutant_38.pml', 'mutant_39.pml', 'mutant_41.pml', 'mutant_43.pml', 'mutant_44.pml', 'mutant_45.pml'] Mutation Score: 0.18518518518518517
+Specification: eventually_red2, Number of Killed Mutants: 23 - ['mutant_1.pml', 'mutant_2.pml', 'mutant_3.pml', 'mutant_4.pml', 'mutant_5.pml', 'mutant_6.pml', 'mutant_7.pml', 'mutant_8.pml', 'mutant_9.pml', 'mutant_13.pml', 'mutant_15.pml', 'mutant_37.pml', 'mutant_38.pml', 'mutant_39.pml', 'mutant_41.pml', 'mutant_43.pml', 'mutant_45.pml', 'mutant_46.pml', 'mutant_48.pml', 'mutant_50.pml', 'mutant_52.pml', 'mutant_53.pml', 'mutant_54.pml'] Mutation Score: 0.42592592592592593
+Specification: mutual_exclusion, Number of Killed Mutants: 6 - ['mutant_4.pml', 'mutant_6.pml', 'mutant_7.pml', 'mutant_26.pml', 'mutant_31.pml', 'mutant_34.pml'] Mutation Score: 0.1111111111111111
+Surviving Mutants: ['mutant_28.pml', 'mutant_42.pml', 'mutant_29.pml', 'mutant_19.pml', 'mutant_22.pml', 'mutant_27.pml', 'mutant_35.pml', 'mutant_23.pml', 'mutant_40.pml', 'mutant_32.pml', 'mutant_47.pml', 'mutant_24.pml', 'mutant_25.pml', 'mutant_20.pml', 'mutant_36.pml', 'mutant_21.pml', 'mutant_33.pml', 'mutant_11.pml', 'mutant_30.pml', 'mutant_51.pml']
+
+Iteration: 2
+Model: Models/Experiment_4/two_trafficlight.pml, Number of Killed Mutants: 0, Number of Surviving Mutants: 20
+Specification: always_valid_states, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: red1_until_green1, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: green1_until_yellow1, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: yellow1_until_red1, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: red2_until_green2, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: green2_until_yellow2, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: yellow2_until_red2, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: eventually_green1, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: eventually_yellow1, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: eventually_red1, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: eventually_green2, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: eventually_yellow2, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: eventually_red2, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: mutual_exclusion, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Surviving Mutants: ['mutant_36_Iteration_1.pml', 'mutant_30_Iteration_1.pml', 'mutant_20_Iteration_1.pml', 'mutant_21_Iteration_1.pml', 'mutant_47_Iteration_1.pml', 'mutant_51_Iteration_1.pml', 'mutant_33_Iteration_1.pml', 'mutant_23_Iteration_1.pml', 'mutant_32_Iteration_1.pml', 'mutant_28_Iteration_1.pml', 'mutant_11_Iteration_1.pml', 'mutant_27_Iteration_1.pml', 'mutant_25_Iteration_1.pml', 'mutant_19_Iteration_1.pml', 'mutant_42_Iteration_1.pml', 'mutant_40_Iteration_1.pml', 'mutant_29_Iteration_1.pml', 'mutant_22_Iteration_1.pml', 'mutant_24_Iteration_1.pml', 'mutant_35_Iteration_1.pml']
+
+Iteration: 4
+Model: Models/Experiment_4/two_trafficlight.pml, Number of Killed Mutants: 34, Number of Surviving Mutants: 20
+Specification: always_valid_states, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: red1_until_green1, Number of Killed Mutants: 14 - ['mutant_1.pml', 'mutant_2.pml', 'mutant_3.pml', 'mutant_5.pml', 'mutant_6.pml', 'mutant_7.pml', 'mutant_9.pml', 'mutant_37.pml', 'mutant_38.pml', 'mutant_39.pml', 'mutant_41.pml', 'mutant_43.pml', 'mutant_44.pml', 'mutant_49.pml'] Mutation Score: 0.25925925925925924
+Specification: green1_until_yellow1, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: yellow1_until_red1, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: red2_until_green2, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: green2_until_yellow2, Number of Killed Mutants: 9 - ['mutant_4.pml', 'mutant_6.pml', 'mutant_7.pml', 'mutant_37.pml', 'mutant_38.pml', 'mutant_39.pml', 'mutant_41.pml', 'mutant_43.pml', 'mutant_45.pml'] Mutation Score: 0.16666666666666666
+Specification: yellow2_until_red2, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: eventually_green1, Number of Killed Mutants: 16 - ['mutant_1.pml', 'mutant_2.pml', 'mutant_3.pml', 'mutant_5.pml', 'mutant_6.pml', 'mutant_7.pml', 'mutant_8.pml', 'mutant_9.pml', 'mutant_37.pml', 'mutant_38.pml', 'mutant_39.pml', 'mutant_41.pml', 'mutant_43.pml', 'mutant_44.pml', 'mutant_45.pml', 'mutant_49.pml'] Mutation Score: 0.2962962962962963
+Specification: eventually_yellow1, Number of Killed Mutants: 29 - ['mutant_1.pml', 'mutant_2.pml', 'mutant_3.pml', 'mutant_4.pml', 'mutant_5.pml', 'mutant_6.pml', 'mutant_7.pml', 'mutant_9.pml', 'mutant_10.pml', 'mutant_12.pml', 'mutant_14.pml', 'mutant_16.pml', 'mutant_17.pml', 'mutant_18.pml', 'mutant_31.pml', 'mutant_34.pml', 'mutant_37.pml', 'mutant_38.pml', 'mutant_39.pml', 'mutant_41.pml', 'mutant_43.pml', 'mutant_44.pml', 'mutant_46.pml', 'mutant_48.pml', 'mutant_49.pml', 'mutant_50.pml', 'mutant_52.pml', 'mutant_53.pml', 'mutant_54.pml'] Mutation Score: 0.5370370370370371
+Specification: eventually_red1, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: eventually_green2, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: eventually_yellow2, Number of Killed Mutants: 10 - ['mutant_4.pml', 'mutant_6.pml', 'mutant_7.pml', 'mutant_37.pml', 'mutant_38.pml', 'mutant_39.pml', 'mutant_41.pml', 'mutant_43.pml', 'mutant_44.pml', 'mutant_45.pml'] Mutation Score: 0.18518518518518517
+Specification: eventually_red2, Number of Killed Mutants: 23 - ['mutant_1.pml', 'mutant_2.pml', 'mutant_3.pml', 'mutant_4.pml', 'mutant_5.pml', 'mutant_6.pml', 'mutant_7.pml', 'mutant_8.pml', 'mutant_9.pml', 'mutant_13.pml', 'mutant_15.pml', 'mutant_37.pml', 'mutant_38.pml', 'mutant_39.pml', 'mutant_41.pml', 'mutant_43.pml', 'mutant_45.pml', 'mutant_46.pml', 'mutant_48.pml', 'mutant_50.pml', 'mutant_52.pml', 'mutant_53.pml', 'mutant_54.pml'] Mutation Score: 0.42592592592592593
+Specification: mutual_exclusion, Number of Killed Mutants: 6 - ['mutant_4.pml', 'mutant_6.pml', 'mutant_7.pml', 'mutant_26.pml', 'mutant_31.pml', 'mutant_34.pml'] Mutation Score: 0.1111111111111111
+Specification: red1_yellow2_until_green1, Number of Killed Mutants: 9 - ['mutant_1.pml', 'mutant_2.pml', 'mutant_3.pml', 'mutant_5.pml', 'mutant_6.pml', 'mutant_7.pml', 'mutant_8.pml', 'mutant_9.pml', 'mutant_49.pml'] Mutation Score: 0.16666666666666666
+Specification: green1_red2_until_yellow1, Number of Killed Mutants: 8 - ['mutant_10.pml', 'mutant_12.pml', 'mutant_14.pml', 'mutant_16.pml', 'mutant_17.pml', 'mutant_18.pml', 'mutant_31.pml', 'mutant_34.pml'] Mutation Score: 0.14814814814814814
+Surviving Mutants: ['mutant_28.pml', 'mutant_42.pml', 'mutant_29.pml', 'mutant_19.pml', 'mutant_22.pml', 'mutant_27.pml', 'mutant_35.pml', 'mutant_23.pml', 'mutant_40.pml', 'mutant_32.pml', 'mutant_47.pml', 'mutant_24.pml', 'mutant_25.pml', 'mutant_20.pml', 'mutant_36.pml', 'mutant_21.pml', 'mutant_33.pml', 'mutant_11.pml', 'mutant_30.pml', 'mutant_51.pml']
+

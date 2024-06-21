@@ -1,0 +1,13 @@
+Iteration: 1
+Model: Models/Experiment_1/mutex.pml, Number of Killed Mutants: 15, Number of Surviving Mutants: 7
+Specification: valid_turn, Number of Killed Mutants: 4 - ['mutant_2.pml', 'mutant_11.pml', 'mutant_13.pml', 'mutant_22.pml'] Mutation Score: 0.18181818181818182
+Specification: valid_flag_0, Number of Killed Mutants: 4 - ['mutant_2.pml', 'mutant_11.pml', 'mutant_13.pml', 'mutant_22.pml'] Mutation Score: 0.18181818181818182
+Specification: valid_flag_1, Number of Killed Mutants: 4 - ['mutant_2.pml', 'mutant_11.pml', 'mutant_13.pml', 'mutant_22.pml'] Mutation Score: 0.18181818181818182
+Specification: valid_cnt, Number of Killed Mutants: 4 - ['mutant_2.pml', 'mutant_11.pml', 'mutant_13.pml', 'mutant_22.pml'] Mutation Score: 0.18181818181818182
+Specification: mutual_exclusion, Number of Killed Mutants: 4 - ['mutant_2.pml', 'mutant_11.pml', 'mutant_13.pml', 'mutant_22.pml'] Mutation Score: 0.18181818181818182
+Specification: eventually_critical_section, Number of Killed Mutants: 6 - ['mutant_16.pml', 'mutant_17.pml', 'mutant_18.pml', 'mutant_19.pml', 'mutant_20.pml', 'mutant_21.pml'] Mutation Score: 0.2727272727272727
+Specification: always_eventually_critical_section, Number of Killed Mutants: 15 - ['mutant_2.pml', 'mutant_6.pml', 'mutant_7.pml', 'mutant_8.pml', 'mutant_9.pml', 'mutant_10.pml', 'mutant_11.pml', 'mutant_13.pml', 'mutant_16.pml', 'mutant_17.pml', 'mutant_18.pml', 'mutant_19.pml', 'mutant_20.pml', 'mutant_21.pml', 'mutant_22.pml'] Mutation Score: 0.6818181818181818
+Specification: process_a_enters_critical_section, Number of Killed Mutants: 15 - ['mutant_2.pml', 'mutant_6.pml', 'mutant_7.pml', 'mutant_8.pml', 'mutant_9.pml', 'mutant_10.pml', 'mutant_11.pml', 'mutant_13.pml', 'mutant_16.pml', 'mutant_17.pml', 'mutant_18.pml', 'mutant_19.pml', 'mutant_20.pml', 'mutant_21.pml', 'mutant_22.pml'] Mutation Score: 0.6818181818181818
+Specification: process_b_enters_critical_section, Number of Killed Mutants: 15 - ['mutant_2.pml', 'mutant_6.pml', 'mutant_7.pml', 'mutant_8.pml', 'mutant_9.pml', 'mutant_10.pml', 'mutant_11.pml', 'mutant_13.pml', 'mutant_16.pml', 'mutant_17.pml', 'mutant_18.pml', 'mutant_19.pml', 'mutant_20.pml', 'mutant_21.pml', 'mutant_22.pml'] Mutation Score: 0.6818181818181818
+Surviving Mutants: ['mutant_1.pml', 'mutant_3.pml', 'mutant_4.pml', 'mutant_5.pml', 'mutant_12.pml', 'mutant_14.pml', 'mutant_15.pml']
+

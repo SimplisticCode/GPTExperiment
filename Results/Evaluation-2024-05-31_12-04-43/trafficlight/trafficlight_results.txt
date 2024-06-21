@@ -1,0 +1,41 @@
+Iteration: 1
+Model: Models/Experiment_4/trafficlight.pml, Number of Killed Mutants: 8, Number of Surviving Mutants: 1
+Specification: always_valid_state, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: red_until_green, Number of Killed Mutants: 3 - ['mutant_2.pml', 'mutant_3.pml', 'mutant_7.pml'] Mutation Score: 0.3333333333333333
+Specification: green_until_yellow, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: yellow_until_red, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: eventually_red, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: eventually_green, Number of Killed Mutants: 4 - ['mutant_2.pml', 'mutant_3.pml', 'mutant_5.pml', 'mutant_7.pml'] Mutation Score: 0.4444444444444444
+Specification: eventually_yellow, Number of Killed Mutants: 8 - ['mutant_1.pml', 'mutant_2.pml', 'mutant_3.pml', 'mutant_4.pml', 'mutant_5.pml', 'mutant_6.pml', 'mutant_7.pml', 'mutant_8.pml'] Mutation Score: 0.8888888888888888
+Surviving Mutants: ['mutant_9.pml']
+
+Iteration: 2
+Model: Models/Experiment_4/trafficlight.pml, Number of Killed Mutants: 1, Number of Surviving Mutants: 0
+Specification: always_valid_state, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: red_until_green, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: green_until_yellow, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: yellow_until_red, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: eventually_red, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: eventually_green, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: eventually_yellow, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: no_stuck_in_red, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: no_stuck_in_green, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: no_stuck_in_yellow, Number of Killed Mutants: 1 - ['mutant_9_Iteration_1.pml'] Mutation Score: 1.0
+Specification: correct_transition_order, Number of Killed Mutants: 1 - ['mutant_9_Iteration_1.pml'] Mutation Score: 1.0
+Surviving Mutants: []
+
+Iteration: 4
+Model: Models/Experiment_4/trafficlight.pml, Number of Killed Mutants: 9, Number of Surviving Mutants: 0
+Specification: always_valid_state, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: red_until_green, Number of Killed Mutants: 3 - ['mutant_2.pml', 'mutant_3.pml', 'mutant_7.pml'] Mutation Score: 0.3333333333333333
+Specification: green_until_yellow, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: yellow_until_red, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: eventually_red, Number of Killed Mutants: 0 - [] Mutation Score: 0.0
+Specification: eventually_green, Number of Killed Mutants: 4 - ['mutant_2.pml', 'mutant_3.pml', 'mutant_5.pml', 'mutant_7.pml'] Mutation Score: 0.4444444444444444
+Specification: eventually_yellow, Number of Killed Mutants: 8 - ['mutant_1.pml', 'mutant_2.pml', 'mutant_3.pml', 'mutant_4.pml', 'mutant_5.pml', 'mutant_6.pml', 'mutant_7.pml', 'mutant_8.pml'] Mutation Score: 0.8888888888888888
+Specification: no_stuck_in_red, Number of Killed Mutants: 3 - ['mutant_2.pml', 'mutant_3.pml', 'mutant_7.pml'] Mutation Score: 0.3333333333333333
+Specification: no_stuck_in_green, Number of Killed Mutants: 3 - ['mutant_1.pml', 'mutant_4.pml', 'mutant_5.pml'] Mutation Score: 0.3333333333333333
+Specification: no_stuck_in_yellow, Number of Killed Mutants: 3 - ['mutant_7.pml', 'mutant_8.pml', 'mutant_9.pml'] Mutation Score: 0.3333333333333333
+Specification: correct_transition_order, Number of Killed Mutants: 9 - ['mutant_1.pml', 'mutant_2.pml', 'mutant_3.pml', 'mutant_4.pml', 'mutant_5.pml', 'mutant_6.pml', 'mutant_7.pml', 'mutant_8.pml', 'mutant_9.pml'] Mutation Score: 1.0
+Surviving Mutants: []
+

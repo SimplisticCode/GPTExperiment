@@ -1,0 +1,3 @@
+2024-05-31 12:27:14 - INFO - Querying ChatGPT to CREATE_Specification in the model trafficlight
+2024-05-31 12:27:32 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-05-31 12:27:32 - INFO - Response from ChatGPT on CREATE_Specification in the model trafficlight

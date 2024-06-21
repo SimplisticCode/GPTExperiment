@@ -16,7 +16,7 @@ class QueryBuilder:
             - Variable Values: Remember to handle variable values appropriately, noting that:
                 - Variables can only take one value at a time.
                 - You can only refer to future values using operators like '<>', 'U', 'W', not past values.
-                - Consider default variable values (ints are initialized to 0, bools to false).
+                - Consider default var iable values (ints are initialized to 0, bools to false).
             - Process Interleaving: Consider how the interleaving of processes might influence LTL properties.
                 - Interleaving may lead to an execution where a process never get the chance to react to a specific event as it gets preempted by another process that removes the event.
                 - Ensure that the LTL properties are robust to the interleaving of processes.
@@ -821,6 +821,7 @@ class QueryBuilder:
             b) Properties that kill zero mutants are redundant and can be removed.
             c) Two properties that kill the same mutants are redundant, and can be combined or simplified.
             d) Properties that kill only a few mutants may need to be refined or combined with other properties.
+            e) Leave meaningful properties that describe obvious behavior of the model even if they do not kill any mutants.
         Step 3: Simplify LTL Properties: Simplify the LTL properties by removing redundancies, combining similar properties, and refining complex properties.
         Step 4: Ensure Correctness: Verify that the simplified LTL properties are written in the correct Promela syntax and that they are satisfied by the model.
         Step 5: Sort LTL Properties: Sort the LTL properties in order of complexity, starting with the simplest properties first.
