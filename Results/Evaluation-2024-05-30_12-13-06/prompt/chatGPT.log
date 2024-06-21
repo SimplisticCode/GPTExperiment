@@ -1,3 +1,0 @@
-2024-05-30 12:13:06 - INFO - Querying ChatGPT to CREATE_Specification in the model array
-2024-05-30 12:13:48 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-2024-05-30 12:13:48 - INFO - Response from ChatGPT on CREATE_Specification in the model array

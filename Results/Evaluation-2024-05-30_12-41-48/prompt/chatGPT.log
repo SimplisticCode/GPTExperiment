@@ -1,9 +1,0 @@
-2024-05-30 12:41:49 - INFO - Querying ChatGPT to CREATE_Specification in the model array
-2024-05-30 12:42:10 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-2024-05-30 12:42:10 - INFO - Response from ChatGPT on CREATE_Specification in the model array
-2024-05-30 12:42:18 - INFO - Querying ChatGPT to ENHANCE_Specification in the model array_temp_2024-05-30_12-42-10
-2024-05-30 12:42:45 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-2024-05-30 12:42:45 - INFO - Response from ChatGPT on ENHANCE_Specification in the model array_temp_2024-05-30_12-42-10
-2024-05-30 12:42:47 - INFO - Querying ChatGPT to ENHANCE_Specification in the model array_temp_2024-05-30_12-42-10_temp_2024-05-30_12-42-45
-2024-05-30 12:43:07 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
-2024-05-30 12:43:07 - INFO - Response from ChatGPT on ENHANCE_Specification in the model array_temp_2024-05-30_12-42-10_temp_2024-05-30_12-42-45

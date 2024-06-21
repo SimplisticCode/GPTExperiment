@@ -17,3 +17,4 @@ Models/*/mutants/
 OldExperimentResults/
 api_key.txt
 query_chatgpt.py
+*.trail

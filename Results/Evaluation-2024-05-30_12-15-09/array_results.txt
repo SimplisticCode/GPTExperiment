@@ -1,9 +1,0 @@
-Iteration: 0
-Model: Models/Experiment_2/array.pml, Number of Killed Mutants: 0, Number of Surviving Mutants: 1
-, Specification: valid_index, Number of Killed Mutants: 0, Mutation Score: 0.0
-, Specification: eventually_array0_correct, Number of Killed Mutants: 0, Mutation Score: 0.0
-, Specification: eventually_array1_correct, Number of Killed Mutants: 0, Mutation Score: 0.0
-, Specification: eventually_array2_correct, Number of Killed Mutants: 0, Mutation Score: 0.0
-, Specification: eventually_array3_correct, Number of Killed Mutants: 0, Mutation Score: 0.0
-, Specification: array_correct, Number of Killed Mutants: 1, Mutation Score: 0.16666666666666666
-Surviving Mutants: Results/Evaluation-2024-05-30_12-15-09/surviving_mutants/mutant_5_temp_2024-05-30_12-15-42.pml, 
